@@ -3,6 +3,7 @@ import asyncio
 import os
 import json
 import random
+import time
 
 bot = discord.Client()
 
