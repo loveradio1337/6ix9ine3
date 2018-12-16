@@ -2,6 +2,7 @@ import discord
 import asyncio
 import os
 import json
+import random
 
 bot = discord.Client()
 
