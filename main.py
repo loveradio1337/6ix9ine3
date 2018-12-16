@@ -1,4 +1,89 @@
 import discord
+
+from discord.ext import commands
+
+from discord.ext.commands import Bot
+
+import youtube_dl
+
+import random
+
+from os import environ
+
+import asyncio
+
+import time
+
+import random
+
+import datetime
+
+import math
+
+import requests
+
+
+import random
+
+
+import datetime
+
+import math
+
+import sys
+
+import base64
+
+import hashlib
+
+import traceback
+
+import string
+
+import inspect
+
+import json
+
+import aiohttp
+
+import websockets
+
+import urllib.request
+
+import logging
+
+from collections import Counter
+
+import os
+
+import colorsys
+
+import socket
+
+from lxml import html
+import asyncio
+import time
+import random
+import datetime
+import math
+import requests
+import sys
+import base64
+import hashlib
+import traceback
+import string
+import inspect
+import json
+
+import config
+import utils
+import aiohttp
+import websockets
+from bs4 import BeautifulSoup
+import urllib.request
+import logging
+import colorsys
+import socket
 import asyncio
 import os
 import json
