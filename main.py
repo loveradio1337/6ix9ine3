@@ -88,8 +88,6 @@ import json
 import random
 import time
 
-bot = discord.Client()
-
 @bot.event
 
 async def on_message(message):
