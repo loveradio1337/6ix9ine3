@@ -91,6 +91,12 @@ import time
 bot = discord.Client()
 
 @bot.event
+
+async def on_message(message):
+
+	await bot.process_commands(message)
+
+@bot.event
 async def on_message(message):
     with open("users.json", "r") as f:
         users = json.load(f)
