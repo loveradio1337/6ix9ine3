@@ -90,19 +90,7 @@ import time
 
 print("Lets go+++++++++++++++++++++++ boiiiiiiiiiiuuuuuuuu")
 
-async def getprefix(bot, message):
-    if isinstance(message.channel, discord.DMChannel):
-        return commands.when_mentioned_or(">")(bot, message)
-    try:
-        x = await bot.db.prefixes.find_one({ "id": message.guild.id })
-        if not x:
-            return commands.when_mentioned_or(">")(bot, message)
-        prefix = x['prefix']
-        return commands.when_mentioned_or(prefix)(bot, message)
-    except:
-        return commands.when_mentioned_or(">")(bot, message)
-
-bot = commands.Bot(command_prefix=getprefix)
+bot = Bot(description="Like is best", command_prefix=">")
 bot.session = aiohttp.ClientSession(loop=bot.loop)                       
 bot.remove_command('help')
 
