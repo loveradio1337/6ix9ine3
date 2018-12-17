@@ -90,9 +90,19 @@ import time
 
 print("Lets go+++++++++++++++++++++++ boiiiiiiiiiiuuuuuuuu")
 
-bot = Bot(description="Like is best", command_prefix=">")
-bot.session = aiohttp.ClientSession(loop=bot.loop)                       
+bot = Bot(description="Like is best", command_prefix=">")                     
 bot.remove_command('help')
+
+@bot.event
+async def on_member_join(member):
+    with open("users.json", "r") as f: 
+        users = json.load(f)
+
+        await update_data(users, member) 
+
+            with open("users.json", "w") as f:
+            json.dump(users, f) 
+
 
 @bot.event
 async def on_message(message):
