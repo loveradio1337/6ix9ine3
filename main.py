@@ -146,9 +146,9 @@ async def xp(ctx, user: discord.Member = None):
         data = json.load(f)
 
     if data.get(user.id) is not None:
-        await bot.say(f'`XP count is at {data[user.id]["experience"]}.`')
+        await bot.say(f'XP count is at {data[user.id]["experience"]}.')
     else:
-        await bot.say(f'`I cannot see {user.mention} in my list of users.`')
+        await bot.say(f'I cannot see {user.mention} in my list of users.')
 
 #--------------------------------------
 
@@ -160,8 +160,8 @@ async def level(ctx, user: discord.Member = None):
         data = json.load(f)
 
     if data.get(user.id) is not None:
-        await bot.say(f'`User level is {data[user.id]["level"]}.`')
+        await bot.say(f'User level is {data[user.id]["level"]}.')
     else:
-        await bot.say(f'`I cannot see {user.mention} in my list of users.`')
+        await bot.say(f'I cannot see {user.mention} in my list of users.')
 
 bot.run(os.environ['BOT_TOKEN'])
