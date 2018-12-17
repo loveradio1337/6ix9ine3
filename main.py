@@ -150,13 +150,13 @@ server.id]["level"]
 #XP/Level
 @bot.command(pass_context=True)
 async def xp(ctx, user: discord.Member = None):
-    """says your/mentions XP count """
+
     user = user or ctx.message.author
     with open('users.json') as f:
         data = json.load(f)
 
     if data.get(user.id) is not None:
-        await bot.say(f'XP count is at {data[user.id]["experience"]}.')
+        await bot.say(f'XP count is at {experience}.')
     else:
         await bot.say(f'I cannot see {user.mention} in my list of users.')
 
@@ -164,13 +164,13 @@ async def xp(ctx, user: discord.Member = None):
 
 @bot.command(pass_context=True)
 async def level(ctx, user: discord.Member = None):
-    """says your/mentions level """
+
     user = user or ctx.message.author
     with open('users.json') as f:
         data = json.load(f)
 
     if data.get(user.id) is not None:
-        await bot.say(f'User level is {data[user.id]["level"]}.')
+        await bot.say(f'User level is {lvl_end}.')
     else:
         await bot.say(f'I cannot see {user.mention} in my list of users.')
 
