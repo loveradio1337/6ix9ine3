@@ -88,8 +88,9 @@ import json
 import random
 import time
 
-@bot.event
+print("Lets go+++++++++++++++++++++++ boiiiiiiiiiiuuuuuuuu")
 
+@bot.event
 async def on_message(message):
 
 	await bot.process_commands(message)
@@ -135,10 +136,6 @@ async def level_up(users, user, channel, server):
     if lvl_start < lvl_end:
         await bot.send_message(channel, f":tada: Congrats {user.mention}, you levelled up to level {lvl_end}!")
         users[user.id + "-" + server.id]["level"] = lvl_end
-
-@bot.event
-async def on_ready():
-    print ("LETS GO BOIII")
 
 @bot.command(pass_context=True)
 async def boi(ctx):
