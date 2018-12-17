@@ -121,7 +121,7 @@ async def update_data(users, user, server):
         users[user.id + "-" + server.id]["last_message"] = 0
 
 async def add_experience(users, user, exp, server):
-    if time.time() - users[user.id + "-" + server.id]["last_message"] > 5: 
+    if time.time() - users[user.id + "-" + server.id]["last_message"] > 10: 
         users[user.id + "-" + server.id]["experience"] += exp
         users[user.id + "-" + server.id]["last_message"] = time.time()
     else:
@@ -129,7 +129,8 @@ async def add_experience(users, user, exp, server):
 
 async def level_up(users, user, channel, server):
     experience = users[user.id + "-" + server.id]["experience"]
-    lvl_start = users[user.id + "-" + server.id]["level"]
+    lvl_start = users[user.id + "-" + 
+server.id]["level"]
     lvl_end = int(experience ** (1/4))
 
     if lvl_start < lvl_end:
@@ -137,8 +138,11 @@ async def level_up(users, user, channel, server):
         users[user.id + "-" + server.id]["level"] = lvl_end
 
 @bot.command(pass_context=True)
-async def boi(ctx):
-    await bot.say("Wassup Boiii")
+async def level(ctx, user, users):
+    await bot.say(f"{user.mention} your level is {lvl_end}.")
 
+@bot.command(pass_context=True)
+async def xp(ctx, user, users):
+    await bot.say(f"{user.mention} your xp is {experience}.")
 
 bot.run(os.environ['BOT_TOKEN'])
