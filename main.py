@@ -137,12 +137,31 @@ server.id]["level"]
         await bot.send_message(channel, f":tada: Congrats {user.mention}, you levelled up to level {lvl_end}!")
         users[user.id + "-" + server.id]["level"] = lvl_end
 
+#XP/Level
 @bot.command(pass_context=True)
-async def level(ctx, user, users):
-    await bot.say(f"{user.mention} your level is {lvl_end}.")
+async def xp(ctx, user: discord.Member = None):
+    """says your/mentions XP count """
+    user = user or ctx.message.author
+    with open('users.json') as f:
+        data = json.load(f)
+
+    if data.get(user.id) is not None:
+        await bot.say(f'`XP count is at {data[user.id]["experience"]}.`')
+    else:
+        await bot.say(f'`I cannot see {user.mention} in my list of users.`')
+
+#--------------------------------------
 
 @bot.command(pass_context=True)
-async def xp(ctx, user, users):
-    await bot.say(f"{user.mention} your xp is {experience}.")
+async def level(ctx, user: discord.Member = None):
+    """says your/mentions level """
+    user = user or ctx.message.author
+    with open('users.json') as f:
+        data = json.load(f)
+
+    if data.get(user.id) is not None:
+        await bot.say(f'`User level is {data[user.id]["level"]}.`')
+    else:
+        await bot.say(f'`I cannot see {user.mention} in my list of users.`')
 
 bot.run(os.environ['BOT_TOKEN'])
