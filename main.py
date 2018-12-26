@@ -95,7 +95,7 @@ bot.remove_command('help')
 
 @bot.event
 async def on_member_join(member):
-    with open("users.json", "r") as f: 
+    with open("json/users.json", "r") as f: 
         users = json.load(f)
 
         await update_data(users, member) 
@@ -106,7 +106,7 @@ async def on_member_join(member):
 
 @bot.event
 async def on_message(message):
-    with open("users.json", "r") as f:
+    with open("json/users.json", "r") as f:
         users = json.load(f)
 
         if message.author.bot:
@@ -119,7 +119,7 @@ async def on_message(message):
             await add_experience(users, message.author, number, message.server)
             await level_up(users, message.author, message.channel, message.server)
 
-        with open("users.json", "w") as f:
+        with open("json/users.json", "w") as f:
             json.dump(users, f)
     await bot.process_commands(message)
 
@@ -144,7 +144,10 @@ server.id]["level"]
     lvl_end = int(experience ** (1/4))
 
     if lvl_start < lvl_end:
-        await bot.send_message(channel, f":tada: Congrats {user.mention}, you levelled up to level {lvl_end}!")
+        embed=discord.Embed(color=0xC72323)
+        embed.add_field(name=🎉 Congrats 🎉, value=f"{user.mention}\nYou are now level {lvl_end} !")
+        embed.set_thumbnail(url=user.avatar_url)
+        await bot.send_message(channel, embed=embed)
         users[user.id + "-" + server.id]["level"] = lvl_end
 
 #XP/Level
@@ -152,11 +155,11 @@ server.id]["level"]
 async def xp(ctx, user: discord.Member = None):
 
     user = user or ctx.message.author
-    with open('users.json') as f:
+    with open('json/users.json') as f:
         data = json.load(f)
 
     if data.get(user.id) is not None:
-        await bot.say(f'XP count is at {experience}.')
+        await bot.say('XP count is at ' + exp)
     else:
         await bot.say(f'I cannot see {user.mention} in my list of users.')
 
@@ -170,7 +173,7 @@ async def level(ctx, user: discord.Member = None):
         data = json.load(f)
 
     if data.get(user.id) is not None:
-        await bot.say(f'User level is {lvl_end}.')
+        await bot.say('User level is ' + lvl_end)
     else:
         await bot.say(f'I cannot see {user.mention} in my list of users.')
 
