@@ -127,11 +127,11 @@ async def update_data(users, user, server):
     if not user.id + "-" + server.id in users:
         users[user.id + "-" + server.id] = {}
         users[user.id + "-" + server.id]["experience"] = 0
-        users[user.id + "-" + server.id]["level"] = 1
+        users[user.id + "-" + server.id]["level"] = 0
         users[user.id + "-" + server.id]["last_message"] = 0
 
 async def add_experience(users, user, exp, server):
-    if time.time() - users[user.id + "-" + server.id]["last_message"] > 10: 
+    if time.time() - users[user.id + "-" + server.id]["last_message"] > 20: 
         users[user.id + "-" + server.id]["experience"] += exp
         users[user.id + "-" + server.id]["last_message"] = time.time()
     else:
@@ -141,11 +141,11 @@ async def level_up(users, user, channel, server):
     experience = users[user.id + "-" + server.id]["experience"]
     lvl_start = users[user.id + "-" + 
 server.id]["level"]
-    lvl_end = int(experience ** (1/4))
+    lvl_end = int(experience ** (1/7))
 
     if lvl_start < lvl_end:
         embed=discord.Embed(color=0xC72323)
-        embed.add_field(name="🎉 Congrats 🎉", value=f"{user.mention}\nYou are now level {lvl_end} !")
+        embed.add_field(name="🎉 Congrats 🎉", value=f"{user.mention}\n**You are now level {lvl_end} !**")
         embed.set_thumbnail(url=user.avatar_url)
         await bot.send_message(channel, embed=embed)
         users[user.id + "-" + server.id]["level"] = lvl_end
@@ -161,7 +161,11 @@ async def xp(ctx, user: discord.Member = None):
     if data.get(user.id) is not None:
         await bot.say('XP count is at ' + exp)
     else:
-        await bot.say(f'I cannot see {user.mention} in my list of users.')
+        user = user or ctx.message.author
+        with open('json/users.json') as f:
+            data = json.load(f)
+        if data.get(user.id) is not None:
+            await bot.say('XP count is at ' + exp)
 
 #--------------------------------------
 
@@ -169,12 +173,18 @@ async def xp(ctx, user: discord.Member = None):
 async def level(ctx, user: discord.Member = None):
 
     user = user or ctx.message.author
-    with open('users.json') as f:
+    with open('json/users.json') as f:
         data = json.load(f)
 
     if data.get(user.id) is not None:
         await bot.say('User level is ' + lvl_end)
     else:
-        await bot.say(f'I cannot see {user.mention} in my list of users.')
+
+        user = user or ctx.message.author
+        with open('json/users.json') as f:
+            data = json.load(f)
+
+        if data.get(user.id) is not None:
+            await bot.say('User level is ' + lvl_end)
 
 bot.run(os.environ['BOT_TOKEN'])
