@@ -145,7 +145,7 @@ server.id]["level"]
 
     if lvl_start < lvl_end:
         embed=discord.Embed(color=0xC72323)
-        embed.add_field(name=🎉 Congrats 🎉, value=f"{user.mention}\nYou are now level {lvl_end} !")
+        embed.add_field(name="🎉 Congrats 🎉", value=f"{user.mention}\nYou are now level {lvl_end} !")
         embed.set_thumbnail(url=user.avatar_url)
         await bot.send_message(channel, embed=embed)
         users[user.id + "-" + server.id]["level"] = lvl_end
